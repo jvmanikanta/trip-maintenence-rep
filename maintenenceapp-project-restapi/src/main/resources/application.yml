@@ -1,0 +1,13 @@
+server:
+  port: 8081 
+  
+eureka:  client:    service-url:      default-zone: http://localhost:8761
+      
+spring:  datasource:    username: sql6442720 
+    password: GfbDzKfe9X
+    url: jdbc:mysql://sql6.freesqldatabase.com:3306/sql6442720
+  jpa:    database-platform: org.hibernate.dialect.MySQL5Dialect
+    show-sql: true
+    hibernate:      ddl-auto: update
+      
+  application:    name: MAINTENENCE-SERVICE
