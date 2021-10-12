@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,26 +35,23 @@ public class Workers {
 	@Column(length = 40)
 	private String resourceType;
 	private LocalDate Resourcesavailablefrom;
-	private LocalDate Resourcesavailableto;
+	@Enumerated(EnumType.STRING)
 	private Available availability;
 	@ManyToOne
 	@JoinColumn(name = "task_id")
 	private Task task;
 
-	public Workers(String resourceName, String resourceType, LocalDate resourcesavailablefrom,
-			LocalDate resourcesavailableto) {
+	public Workers(String resourceName, String resourceType, LocalDate resourcesavailablefrom) {
 		super();
 		this.resourceName = resourceName;
 		this.resourceType = resourceType;
 		Resourcesavailablefrom = resourcesavailablefrom;
-		Resourcesavailableto = resourcesavailableto;
 	}
 
 	@Override
 	public String toString() {
 		return "Workers [resourceName=" + resourceName + ", resourceType=" + resourceType + ", Resourcesavailablefrom="
-				+ Resourcesavailablefrom + ", Resourcesavailableto=" + Resourcesavailableto + ", availability="
-				+ availability + "]";
+				+ Resourcesavailablefrom + "," + availability +"= availability "+ "]";
 	}
 	
 	

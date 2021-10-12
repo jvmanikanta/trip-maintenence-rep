@@ -6,12 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
+
 import com.mainteneceapp.model.Maintenence;
 import com.mainteneceapp.model.Priority;
 import com.mainteneceapp.model.Status;
 import com.mainteneceapp.service.IMaintenenceService;
 
 @SpringBootApplication
+@EnableDiscoveryClient
 public class TripappProjectRestapiApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
@@ -26,7 +31,12 @@ public class TripappProjectRestapiApplication implements CommandLineRunner {
 		LocalDate startDate = LocalDate.of(2021, 10, 4);
 		LocalDate endDate = LocalDate.of(2021, 11, 20);
 		Maintenence maintenence = new Maintenence("BikeService","mani",startDate,endDate,Priority.HIGH,Status.valueOf("INPROGRESS"));
-		maintenenceServiceImpl.addMaintenence(maintenence);
+		//maintenenceServiceImpl.addMaintenence(maintenence);
+	}
+	
+	@Bean
+	RestTemplate restTemplate() {
+		return new RestTemplate();
 	}
 
 }

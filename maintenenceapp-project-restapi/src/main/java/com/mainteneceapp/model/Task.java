@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -40,17 +44,24 @@ public class Task {
 	private LocalDate taskStartDate;
 	private LocalDate taskEndDate;
 	@Column(length = 40)
+	@Enumerated(EnumType.STRING)
 	private Priority taskPriority;
 	@Column(length = 40)
 	private String taskDuration;
 	@Column(length = 40)
+	@Enumerated(EnumType.STRING)
 	private Status taskStatus;
+	
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "task")
 	private Set<Workers> resourcesList;
+	
 	@ManyToOne
 	@JoinColumn(name = "maintenence_id")
+	@JsonIgnore
 	private Maintenence maintenence;
+	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "trip_id")
 	private Trip trip;
 	public Task(String taskName, String taskOwner, LocalDate taskStartDate, LocalDate taskEndDate,

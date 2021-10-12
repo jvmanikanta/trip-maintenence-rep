@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,42 +32,41 @@ import lombok.ToString;
 public class Maintenence {
 
 	@Id
-	@GeneratedValue(generator = "project_gen", strategy = GenerationType.AUTO)
-	@SequenceGenerator(name = "project_gen", sequenceName = "project_seq", allocationSize = 1, initialValue = 1)
-	private Integer projectId;
+	@GeneratedValue(generator = "maintenence_gen", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "maintenence_gen", sequenceName = "maintenence_seq", allocationSize = 1, initialValue = 1)
+	private Integer maintenenceId;
 	@Column(length = 30)
-	private String projectName;
+	private String maintenenceName;
 	@Column(length = 30)
-	private String projectOwner;
-	private LocalDate projectStartDate;
-	private LocalDate projectEndDate;
+	private String maintenenceOwner;
+	private LocalDate maintenenceStartDate;
+	private LocalDate maintenenceEndDate;
+	@Enumerated(EnumType.STRING)
+	private Priority maintenencePriority;
 	@Column(length = 30)
-	private Priority projectPriority;
-	@Column(length = 30)
-	private Status projectStatus;
-	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "maintenence")
+	@Enumerated(EnumType.STRING)
+	private Status maintenenceStatus;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "maintenence_id")
 	private Set<Task> taskList;
-	
 	@ManyToOne
-	@JoinColumn(name="trip_id")
+	@JoinColumn(name = "trip_id")
 	private Trip trip;
-	
-	public Maintenence(String projectName, String projectOwner, LocalDate projectStartDate, LocalDate projectEndDate,
-			Priority projectPriority, Status projectStatus) {
+	public Maintenence(String maintenenceName, String maintenenceOwner, LocalDate maintenenceStartDate,
+			LocalDate maintenenceEndDate, Priority maintenencePriority, Status maintenenceStatus) {
 		super();
-		this.projectName = projectName;
-		this.projectOwner = projectOwner;
-		this.projectStartDate = projectStartDate;
-		this.projectEndDate = projectEndDate;
-		this.projectPriority = projectPriority;
-		this.projectStatus = projectStatus;
+		this.maintenenceName = maintenenceName;
+		this.maintenenceOwner = maintenenceOwner;
+		this.maintenenceStartDate = maintenenceStartDate;
+		this.maintenenceEndDate = maintenenceEndDate;
+		this.maintenencePriority = maintenencePriority;
+		this.maintenenceStatus = maintenenceStatus;
 	}
-
 	@Override
 	public String toString() {
-		return "Maintenence [projectName=" + projectName + ", projectOwner=" + projectOwner + ", projectStartDate="
-				+ projectStartDate + ", projectEndDate=" + projectEndDate + ", projectPriority=" + projectPriority
-				+ ", projectStatus=" + projectStatus + "]";
+		return "Maintenence [maintenenceName=" + maintenenceName + ", maintenenceOwner=" + maintenenceOwner
+				+ ", maintenenceStartDate=" + maintenenceStartDate + ", maintenenceEndDate=" + maintenenceEndDate
+				+ ", maintenencePriority=" + maintenencePriority + ", maintenenceStatus=" + maintenenceStatus + "]";
 	}
 	
 	
