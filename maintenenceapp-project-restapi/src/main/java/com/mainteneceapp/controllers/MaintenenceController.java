@@ -226,7 +226,7 @@ public class MaintenenceController {
 	 * @param maintenenceId
 	 * @description updates the status of a maintenance
 	 */
-	@GetMapping("maintenence/status/{status}/maintenenceId/{maintenenceId}")
+	@PatchMapping("maintenence/status/{status}/maintenenceId/{maintenenceId}")
 	public ResponseEntity<Integer> updateMaintenenceStatus(@PathVariable("status")Status status, @PathVariable("maintenenceId")int maintenenceId) {
 		return ResponseEntity.ok(maintenenceService.updateMaintenenceStatus(status, maintenenceId));
 	}
