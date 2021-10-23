@@ -1,5 +1,6 @@
 package com.mainteneceapp.model;
 
+
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -31,6 +32,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @Entity
 @ToString
+/**
+ * 
+ * @author ManikantaJV
+ *
+ */
 public class Task {
 
 	@Id
@@ -65,8 +71,7 @@ public class Task {
 	@JoinColumn(name = "trip_id")
 	private Trip trip;
 	public Task(String taskName, String taskOwner, LocalDate taskStartDate, LocalDate taskEndDate,
-			Priority taskPriority, String taskDuration, Status taskStatus, Set<Workers> resourcesList,
-			Maintenence maintenence, Trip trip) {
+			Priority taskPriority, String taskDuration, Status taskStatus) {
 		super();
 		this.taskName = taskName;
 		this.taskOwner = taskOwner;
@@ -75,9 +80,6 @@ public class Task {
 		this.taskPriority = taskPriority;
 		this.taskDuration = taskDuration;
 		this.taskStatus = taskStatus;
-		this.resourcesList = resourcesList;
-		this.maintenence = maintenence;
-		this.trip = trip;
 	}
 	@Override
 	public String toString() {
@@ -85,7 +87,5 @@ public class Task {
 				+ ", taskEndDate=" + taskEndDate + ", taskPriority=" + taskPriority + ", taskDuration=" + taskDuration
 				+ ", taskStatus=" + taskStatus + "]";
 	}
-	
-	
 	
 }

@@ -13,11 +13,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+/**
+ * @author ManikantaJV
+ */
 
 @Getter
 @Setter
@@ -25,6 +31,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @Entity
 @ToString
+/**
+ * 
+ * @author ManikantaJV
+ *
+ */
 public class Workers {
 	@Id
 	@GeneratedValue(generator = "resources_gene", strategy = GenerationType.AUTO)
@@ -39,6 +50,7 @@ public class Workers {
 	private Available availability;
 	@ManyToOne
 	@JoinColumn(name = "task_id")
+	@JsonIgnore
 	private Task task;
 
 	public Workers(String resourceName, String resourceType, LocalDate resourcesavailablefrom) {

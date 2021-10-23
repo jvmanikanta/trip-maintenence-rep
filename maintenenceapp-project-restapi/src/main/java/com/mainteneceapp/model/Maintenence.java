@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,8 +29,12 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
+/**
+ * 
+ * @author ManikantaJV
+ *
+ */
 public class Maintenence {
 
 	@Id
@@ -48,6 +54,7 @@ public class Maintenence {
 	private Status maintenenceStatus;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "maintenence_id")
+	@JsonIgnore
 	private Set<Task> taskList;
 	@ManyToOne
 	@JoinColumn(name = "trip_id")

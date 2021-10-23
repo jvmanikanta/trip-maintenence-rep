@@ -13,6 +13,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+/**
+ * 
+ * @author ManikantaJV
+ *
+ */
 public class ApiErrors {
 	LocalDateTime timestamp;
 	String message;

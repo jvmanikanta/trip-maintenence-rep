@@ -14,11 +14,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+/**
+ * @author ManikantaJV
+ */
 
 @Getter
 @Setter
@@ -26,6 +33,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @Entity
 @ToString
+/**
+ * 
+ * @author ManikantaJV
+ *
+ */
 public class Trip {
 
 	@Id
@@ -44,7 +56,9 @@ public class Trip {
 	@Column(length = 40)
 	@Enumerated(EnumType.STRING)
 	private Status tripStatus;
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "trip")
+	@JsonIgnore
 	private Set<Maintenence> mainteneceList;
 	
 	public Trip(String tripName, String tripOwner, LocalDate tripStartDate, LocalDate tripEndDate,
